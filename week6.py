@@ -30,14 +30,14 @@ def fetch_image(url):
         response = requests.get(url, timeout=10, stream=True)
         response.raise_for_status()
 
-        # Check headers for safety (basic example: content-type, size)
+        # Check headers for safety (content-type, size)
         content_type = response.headers.get("Content-Type", "")
         if not content_type.startswith("image/"):
             print(f"✗ Skipped (not an image): {url}")
             return
         
         content_length = response.headers.get("Content-Length")
-        if content_length and int(content_length) > 10 * 1024 * 1024:  # 10 MB limit
+        if content_length and int(content_length) > 10 * 1024 * 1024:
             print(f"✗ Skipped (file too large): {url}")
             return
 
